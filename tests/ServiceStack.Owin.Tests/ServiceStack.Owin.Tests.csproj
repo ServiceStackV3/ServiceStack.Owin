@@ -61,7 +61,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ServiceStack.Owin\ServiceStack.Owin.csproj">
+    <ProjectReference Include="..\..\src\ServiceStack.Owin\ServiceStack.Owin.csproj">
       <Project>{F5EFB667-30BB-4F1C-AACD-88381B2784AB}</Project>
       <Name>ServiceStack.Owin</Name>
     </ProjectReference>
