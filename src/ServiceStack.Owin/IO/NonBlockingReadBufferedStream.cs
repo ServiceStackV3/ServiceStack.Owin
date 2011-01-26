@@ -21,9 +21,9 @@ namespace ServiceStack.Owin.IO
 	public class NonBlockingReadBufferedStream : Stream, IOwinStream
 	{
 		private const int MtuAppSize = 1450;
-		private const int BufferAllocationSize = 32 * 1024;
+		private const int BufferAllocationSize = 32 * 1024; //32KB
 
-		internal int ResetClearsBufferOfMaxSize = 4 * 1024 * 1024; //4MB
+		internal int ResetClearsBufferWithSizesOver = 4 * 1024 * 1024; //4MB
 
 		internal byte[] Buffer = new byte[BufferAllocationSize];
 		internal int WriteIndex = 0;
@@ -94,7 +94,7 @@ namespace ServiceStack.Owin.IO
 		public void Reset()
 		{
 			//These buffers are expected to be pooled but remove large writes to save memory
-			if (Buffer.Length > ResetClearsBufferOfMaxSize)
+			if (Buffer.Length > ResetClearsBufferWithSizesOver)
 			{
 				Buffer = new byte[BufferAllocationSize];
 			}
@@ -157,8 +157,7 @@ namespace ServiceStack.Owin.IO
 				currentSegment = new ArraySegment<byte>(
 					stream.Buffer, readIndex, newReadIndex);
 				readIndex = newReadIndex;
-
-				return true; //or false?
+				return true;
 			}
 
 			public void Reset()
